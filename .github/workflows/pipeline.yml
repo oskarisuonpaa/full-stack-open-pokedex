@@ -17,3 +17,8 @@ jobs:
       - run: npm run eslint
       - run: npm run build
       - run: npm run test
+      - uses: cypress-io/github-actions@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
