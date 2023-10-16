@@ -67,12 +67,19 @@ jobs:
         if: success()
         with:
           severity: info
-          details: New version of Pokedex deployed
+          username: Kraken
+          description: New version of Pokedex deployed.
+          footer: "Severity: Info"
+          text: ""
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
         if: failure()
         with:
           severity: error
-          details: Error in CI pipeline.
+          username: Kraken
+          color: "#ff0f0f"
+          description: Something went wrong in CI pipeline
+          footer: "Severity: Failure"
+          text: ""
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
