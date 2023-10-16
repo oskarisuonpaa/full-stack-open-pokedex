@@ -68,7 +68,7 @@ jobs:
         with:
           severity: info
           username: Kraken
-          description: New version of Pokedex deployed.
+          description: New version of Pokedex deployed to Render.
           footer: "Severity: Info"
           text: ""
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
@@ -79,7 +79,7 @@ jobs:
           severity: error
           username: Kraken
           color: "#ff0f0f"
-          description: Something went wrong in CI pipeline
+          description: Something went wronk.
           footer: "Severity: Failure"
           text: ""
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
