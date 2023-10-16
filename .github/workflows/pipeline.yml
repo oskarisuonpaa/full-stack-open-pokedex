@@ -10,30 +10,49 @@ on:
 
 jobs:
   simple_deployment_pipeline:
+    name: Simple Deployment Pipeline
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
-      - run: npm install
-      - run: npm run eslint
-      - run: npm run build
-      - run: npm run test
-      - uses: cypress-io/github-action@v5
+
+      - name: install
+        run: npm install
+
+      - name: lint
+        run: npm run eslint
+
+      - name: build
+        run: npm run build
+
+      - name: test
+        run: npm run test
+
+      - name: test:e2e
+        uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+
       - name: Render Deploy Action
         if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.MY_RENDER_SERVICE_ID}}?key=${{ secrets.MY_RENDER_API_KEY }}
+
   tag_release:
+    permissions: write-all
+    name: Tag release
     needs: [simple_deployment_pipeline]
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: "0"
+
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
