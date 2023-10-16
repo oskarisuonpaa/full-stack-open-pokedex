@@ -5,7 +5,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.get("/version", (_req, res) => {
-  res.send("6");
+  res.send("7");
+});
+
+app.get("/health", (_req, res) => {
+  res.send("ok");
 });
 
 app.use(express.static("dist"));
