@@ -3,28 +3,31 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
-    "jest/globals": true,
-    "cypress/globals": true,
+    'jest/globals': true,
+    'cypress/globals': true
   },
-  extends: ["eslint:recommended", "plugin:react/recommended"],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+  ],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 2018,
-    sourceType: "module",
+    sourceType: 'module'
   },
-  plugins: ["react", "jest", "cypress"],
+  plugins: ['react', 'jest', 'cypress', 'prettier'],
   rules: {
-    indent: ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    quotes: ["error", "single"],
-    semi: ["error", "never"],
-    eqeqeq: "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": ["error", "always"],
-    "arrow-spacing": ["error", { before: true, after: true }],
-    "no-console": "error",
-    "react/prop-types": 0,
-  },
-};
+    indent: ['error', 2],
+    'linebreak-style': ['error', 'unix'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'never'],
+    eqeqeq: 'error',
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': ['error', 'always'],
+    'arrow-spacing': ['error', { before: true, after: true }],
+    'no-console': 'error',
+    'react/prop-types': 0
+  }
+}
