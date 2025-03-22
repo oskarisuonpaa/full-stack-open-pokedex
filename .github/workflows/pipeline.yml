@@ -58,3 +58,29 @@ jobs:
            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
            DEFAULT_BUMP: patch
            WITH_V: true
+    
+  notify:
+    needs: [tag_release]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Success
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: success()
+        with:
+          severity: info
+          username: Kraken
+          description: New version of Pokedex deployed to Render.
+          footer: "Severity: Info"
+          text: ""
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: failure()
+        with:
+          severity: error
+          username: Kraken
+          color: "#ff0f0f"
+          description: Something went wronk.
+          footer: "Severity: Failure"
+          text: ""
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
